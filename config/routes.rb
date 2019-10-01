@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :users
+  # resources :users
 
   ## The above line is shorthand for all of the following 8 lines...
 
@@ -12,4 +12,14 @@ Rails.application.routes.draw do
   # patch '/users/:id', to: 'users#update'
   # put '/users/:id', to: 'users#update'
   # delete '/users/:id', to: 'users#destroy'
+
+  resources :users, only: [:create, :destroy, :index, :show, :update] do
+    resources :artworks, only: [:index]
+  end
+
+  resources :artworks, only: [:create, :destroy, :show, :update]
+
+  resources :artwork_shares, only: [:create, :destroy]
+
+  # bundle exec rails routes
 end
